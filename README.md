@@ -6,6 +6,9 @@ This is a demo project exploring pathtracing. Has support for metallic, dielectr
 
 Found in render/
 
+### Balls
+![Balls](render/balls.png)
+
 ## How to run
 
 - Building requires premake
