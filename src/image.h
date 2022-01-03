@@ -111,6 +111,5 @@ void write_ppm(const std::string& filepath, const Image& img) {
 	fs.write(img_str.c_str(), img_str.size());
 	fs.close();
 
-	std::string start_cmd = "start " + std::string(filepath);
-	std::system(start_cmd.c_str());
 }
+
