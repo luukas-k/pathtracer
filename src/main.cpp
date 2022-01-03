@@ -194,6 +194,7 @@ int main(int argc, const char* argv[]) {
 	cam.set_position({ 0.f, 50.f, -150.f });
 	cam.set_rotation(3.1415 / 10, 0.f, 0.f);
 
+
 	if (!update_renderer_settings(renderer, args))
 		return -1;
 
@@ -202,7 +203,7 @@ int main(int argc, const char* argv[]) {
 
 	renderer.render_mt_new(scene, cam, render_target);
 
-	write_ppm("rt.ppm", render_target);
-
+	write_ppm("render/rt.ppm", render_target);
+	
 	return 0;
 }
