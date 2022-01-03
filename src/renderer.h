@@ -202,9 +202,9 @@ public:
 		ThreadPool tp(num_threads);
 		u32 total_tasks = 0;
 		for (u32 y = 0; y < h; ) {
-			u32 cons_h = min<u32>(32, h - y);
+			u32 cons_h = min<u32>(8, h - y);
 			for (u32 x = 0; x < w; ) {
-				u32 cons_w = min<u32>(32, w - x);
+				u32 cons_w = min<u32>(8, w - x);
 				TaskInfo ti{
 					.x = x,
 					.y = y,
@@ -237,9 +237,9 @@ public:
 			u32 num_tasks_left = tp.task_queue_size();
 			auto t1 = std::chrono::high_resolution_clock::now();
 			auto time_since_start = (u32)std::chrono::duration_cast<std::chrono::seconds>(t1 - t0).count();
-			u32 completion_percentage = (u32)(((float)(total_tasks - num_tasks_left) / (float)total_tasks) * 100.f);
-			u32 time_estimate = (u32)(((float)time_since_start / (float)completion_percentage) * 100.f);
-			std::cout << "Completion: " << completion_percentage << " " << time_string(time_since_start) << " " << time_string(time_estimate) << "\n";
+			float completion_percentage = ((float)(total_tasks - num_tasks_left) / (float)total_tasks) * 100.f;
+			float time_estimate = (((float)time_since_start / (float)completion_percentage) * 100.f);
+			std::cout << "Completion: " << completion_percentage << " Runtime: " << time_string(time_since_start) << " Total runtime estimate: " << time_string(time_estimate - time_since_start) << "\n";
 		}
 	}
 
