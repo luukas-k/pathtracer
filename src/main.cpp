@@ -176,24 +176,23 @@ int main(int argc, const char* argv[]) {
 	Args args(argc, argv);
 
 	Scene scene;
-	generate_scene_1(scene, 200);
+	generate_scene_1(scene, 4);
 	
 	Renderer renderer;
 	renderer.set_thread_count(std::thread::hardware_concurrency() - 1);
-	renderer.set_samples(50);
-	renderer.set_bounces(7);
+	renderer.set_samples(10);
+	renderer.set_bounces(26);
 	renderer.set_max_path_steps(300);
-	renderer.set_epsilon(0.00000001);
+	renderer.set_epsilon(0.000001);
 
-	u32 w = 500, h = 500;
+	u32 w = 1024, h = 1024;
 
 	Image render_target(w, h);
 
 	Camera cam;
-	cam.set_focal_distance(8.f);
+	cam.set_focal_distance(50.f);
 	cam.set_position({ 0.f, 50.f, -150.f });
 	cam.set_rotation(3.1415 / 10, 0.f, 0.f);
-
 
 	if (!update_renderer_settings(renderer, args))
 		return -1;
@@ -201,7 +200,7 @@ int main(int argc, const char* argv[]) {
 	std::cerr << "total min: " << renderer.get_samples() * render_target.width() * render_target.height() << std::endl;
 	std::cerr << "total max: " << renderer.get_bounces() * renderer.get_samples() * render_target.width() * render_target.height() << std::endl;
 
-	renderer.render_mt_new(scene, cam, render_target);
+	renderer.render_mt(scene, cam, render_target);
 
 	write_ppm("render/rt.ppm", render_target);
 	
