@@ -1,5 +1,1 @@
-.vs/
-bin/
-obj/
-*sln
-*vcxproj*
+build/

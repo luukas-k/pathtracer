@@ -14,12 +14,11 @@ Found in render/
 
 ## How to run
 
-- Building requires premake
+- Building requires cmake
 
 1.
-Use premake to generate project files. 
 ```
-premake5.exe vs2022
+cmake -B build
 ```
 
 2.
